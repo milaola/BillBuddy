@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bill Buddy - Insights</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+
+   
+
+    <header class="header">
+
+        <div class="container nav-container">
+
+            <a href="index.html" class="logo">
+                <span class="logo-icon">💳</span>
+                <span>Bill Buddy</span>
+            </a>
+
+
+            <nav class="navigation">
+
+                <a href="index.html">
+                    Dashboard
+                </a>
+
+                <a href="subscriptions.html">
+                    Subscriptions
+                </a>
+
+                <a href="insights.html" class="active">
+                    Insights
+                </a>
+
+                <a href="add.html" class="add-link">
+                    + Add Subscription
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+
+    <main class="page-container">
+
+
+        <section class="page-heading">
+
+            <p class="eyebrow">UNDERSTAND YOUR SPENDING</p>
+
+            <h1>Spending Insights</h1>
+
+            <p>
+                See where your subscription money is going
+                and identify opportunities to save.
+            </p>
+
+        </section>
+
+
+       
+
+        <section class="insights-grid">
+
+
+            <div class="insight-card">
+
+                <span class="insight-icon">
+                    💰
+                </span>
+
+                <div>
+
+                    <p>Monthly Spending</p>
+
+                    <h2 id="insightMonthly">
+                        $0.00
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="insight-card">
+
+                <span class="insight-icon">
+                    📊
+                </span>
+
+                <div>
+
+                    <p>Yearly Projection</p>
+
+                    <h2 id="insightYearly">
+                        $0.00
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="insight-card">
+
+                <span class="insight-icon">
+                    📋
+                </span>
+
+                <div>
+
+                    <p>Total Subscriptions</p>
+
+                    <h2 id="insightTotal">
+                        0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+       
+
+        <section class="content-card">
+
+            <div class="section-title">
+
+                <h2>Spending by Category</h2>
+
+                <p>
+                    See which categories take up the
+                    largest portion of your spending.
+                </p>
+
+            </div>
+
+
+            <div id="categoryInsights">
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        📊
+                    </div>
+
+                    <h3>No data available</h3>
+
+                    <p>
+                        Add subscriptions to generate
+                        spending insights.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <section class="content-card savings-card">
+
+            <div class="section-title">
+
+                <h2>💡 Potential Savings</h2>
+
+                <p>
+                    Review your subscriptions and consider
+                    whether you still use each service.
+                </p>
+
+            </div>
+
+
+            <div id="savingsContainer">
+
+                <div class="savings-message">
+
+                    <h3>
+                        Start tracking your subscriptions
+                    </h3>
+
+                    <p>
+                        Once you add subscriptions, Bill Buddy
+                        will help you understand your spending.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

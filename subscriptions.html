@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bill Buddy - Subscriptions</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+
+
+    <header class="header">
+
+        <div class="container nav-container">
+
+            <a href="index.html" class="logo">
+                <span class="logo-icon">💳</span>
+                <span>Bill Buddy</span>
+            </a>
+
+
+            <nav class="navigation">
+
+                <a href="index.html">
+                    Dashboard
+                </a>
+
+                <a href="subscriptions.html" class="active">
+                    Subscriptions
+                </a>
+
+                <a href="insights.html">
+                    Insights
+                </a>
+
+                <a href="add.html" class="add-link">
+                    + Add Subscription
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+   
+
+    <main class="page-container">
+
+
+        <section class="page-heading">
+
+            <p class="eyebrow">MANAGE YOUR EXPENSES</p>
+
+            <h1>Your Subscriptions</h1>
+
+            <p>
+                View and manage all your recurring payments
+                in one place.
+            </p>
+
+        </section>
+
+
+
+        <section class="controls">
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="🔍 Search subscriptions..."
+                >
+
+            </div>
+
+
+            <select id="categoryFilter">
+
+                <option value="All">
+                    All Categories
+                </option>
+
+                <option value="Entertainment">
+                    Entertainment
+                </option>
+
+                <option value="Software">
+                    Software
+                </option>
+
+                <option value="Fitness">
+                    Fitness
+                </option>
+
+                <option value="Cloud Storage">
+                    Cloud Storage
+                </option>
+
+                <option value="Education">
+                    Education
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+
+            <a href="add.html" class="primary-btn">
+                + Add Subscription
+            </a>
+
+        </section>
+
+
+       
+
+        <section id="subscriptionsList" class="subscriptions-list">
+
+            <div id="emptyState" class="empty-state">
+
+                <div class="empty-icon">
+                    📭
+                </div>
+
+                <h2>No subscriptions yet</h2>
+
+                <p>
+                    Add your first subscription to start
+                    tracking your recurring expenses.
+                </p>
+
+                <a href="add.html" class="primary-btn">
+                    + Add Subscription
+                </a>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

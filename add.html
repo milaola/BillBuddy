@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bill Buddy - Add Subscription</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    
+    <header class="header">
+
+        <div class="container nav-container">
+
+            <a href="index.html" class="logo">
+                <span class="logo-icon">💳</span>
+                <span>Bill Buddy</span>
+            </a>
+
+            <nav class="navigation">
+
+                <a href="index.html">
+                    Dashboard
+                </a>
+
+                <a href="subscriptions.html">
+                    Subscriptions
+                </a>
+
+                <a href="insights.html">
+                    Insights
+                </a>
+
+                <a href="add.html" class="add-link active">
+                    + Add Subscription
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- Main Content -->
+    <main class="page-container">
+
+        <section class="page-heading">
+
+            <p class="eyebrow">BILL BUDDY</p>
+
+            <h1>Add a Subscription</h1>
+
+            <p>
+                Keep track of your recurring payments by adding
+                a subscription below.
+            </p>
+
+        </section>
+
+
+        <section class="form-card">
+
+            <form id="subscriptionForm">
+
+                <div class="form-group">
+
+                    <label for="subscriptionName">
+                        Subscription Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="subscriptionName"
+                        placeholder="e.g. Netflix"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="subscriptionAmount">
+                        Amount
+                    </label>
+
+                    <input
+                        type="number"
+                        id="subscriptionAmount"
+                        placeholder="e.g. 15.99"
+                        min="0"
+                        step="0.01"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="subscriptionCategory">
+                            Category
+                        </label>
+
+                        <select id="subscriptionCategory" required>
+
+                            <option value="">
+                                Select category
+                            </option>
+
+                            <option value="Entertainment">
+                                Entertainment
+                            </option>
+
+                            <option value="Software">
+                                Software
+                            </option>
+
+                            <option value="Fitness">
+                                Fitness
+                            </option>
+
+                            <option value="Cloud Storage">
+                                Cloud Storage
+                            </option>
+
+                            <option value="Education">
+                                Education
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="billingCycle">
+                            Billing Cycle
+                        </label>
+
+                        <select id="billingCycle" required>
+
+                            <option value="">
+                                Select billing cycle
+                            </option>
+
+                            <option value="Monthly">
+                                Monthly
+                            </option>
+
+                            <option value="Yearly">
+                                Yearly
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="nextPayment">
+                        Next Payment Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="nextPayment"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <a href="index.html" class="secondary-btn">
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        Add Subscription
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
