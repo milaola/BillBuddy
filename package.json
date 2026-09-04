@@ -1,0 +1,24 @@
+{
+  "name": "billbuddy",
+  "version": "1.0.0",
+  "description": "BillBuddy subscription tracker.",
+  "main": "script.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/milaola/BillBuddy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/milaola/BillBuddy/issues"
+  },
+  "homepage": "https://github.com/milaola/BillBuddy#readme",
+  "devDependencies": {
+    "jest": "^30.5.1"
+  }
+}
