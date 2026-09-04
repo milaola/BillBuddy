@@ -2,7 +2,7 @@ const {
     isValidSubscriptionName,
     getMonthlyAmount,
     getYearlyAmount
-} = require("../script");
+} = require("../functions");
 
 describe("Bill Buddy Functions", () => {
 
