@@ -93,7 +93,7 @@ justify-content: center;
     border-radius: 12px;
 
     font-size: 20px;
-}
+
 
 
 .navigation {
@@ -143,9 +143,7 @@ justify-content: center;
 }
 
 
-/* =========================================
-   HERO / DASHBOARD
-========================================= */
+
 
 .hero {
     padding: 80px 0 50px;
@@ -244,9 +242,6 @@ justify-content: center;
 }
 
 
-/* =========================================
-   PAGE HEADINGS
-========================================= */
 
 .page-heading {
     margin-bottom: 35px;
@@ -430,11 +425,6 @@ justify-content: center;
 
     margin-top: 10px;
 }
-
-
-/* =========================================
-   CONTROLS
-========================================= */
 
 .controls {
     display: flex;
