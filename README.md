@@ -34,7 +34,26 @@ Bill Buddy is a web application for tracking and managing recurring subscruption
 - Fetch API
 - FileReader API
 
-## Project Structure
+
+## Running the Project
+
+Open the BillBuddy project Folder in VS Code.
+
+Run the proejct using a local development server such as Live Server. 
+
+Open index.html through the local development server in your browser. 
+
+## Running tests
+
+```bash
+
+npm test
+
+
+
+
+
+# Project Structure
 
 ```text
 
@@ -58,15 +77,4 @@ BillBuddy/
 │   └── functions.test.js
 │
 └── node_modules/
-
-## Running the Project
-
-Open the project using Local development server. 
-
-## Running tests
-
-```bash
-npm test
-
-
 
