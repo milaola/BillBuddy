@@ -20,5 +20,11 @@
   "homepage": "https://github.com/milaola/BillBuddy#readme",
   "devDependencies": {
     "jest": "^30.5.1"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "sqlite3": "^6.0.1"
   }
 }

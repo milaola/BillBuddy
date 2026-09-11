@@ -1033,3 +1033,114 @@ displaySubscriptions();
 displayInsights();
 
 loadCategories();
+
+const signupForm = document.getElementById("signupForm");
+
+if (signupForm) {
+
+    signupForm.addEventListener("submit", function (event) {
+
+        event.preventDefault();
+
+        const name =
+            document.getElementById("name").value.trim();
+
+        const email =
+            document.getElementById("email").value.trim();
+
+        const password =
+            document.getElementById("password").value;
+
+        const confirmPassword =
+            document.getElementById("confirmPassword").value;
+
+        const signupMessage =
+            document.getElementById("signupMessage");
+
+
+        
+
+        if (password !== confirmPassword) {
+
+            signupMessage.textContent =
+                "Passwords do not match.";
+
+            signupMessage.style.color = "red";
+
+            return;
+        }
+
+
+     
+
+        signupMessage.textContent =
+            "Account created successfully!";
+
+        signupMessage.style.color = "green";
+
+
+       
+
+        setTimeout(function () {
+
+            window.location.href = "index.html";
+
+        }, 1000);
+
+    });
+
+}
+
+
+
+
+const loginForm = document.getElementById("loginForm");
+
+if (loginForm) {
+
+    loginForm.addEventListener("submit", function (event) {
+
+        event.preventDefault();
+
+        const email =
+            document.getElementById("email").value.trim();
+
+        const password =
+            document.getElementById("password").value;
+
+        const loginMessage =
+            document.getElementById("loginMessage");
+
+
+     
+
+        if (!email || !password) {
+
+            loginMessage.textContent =
+                "Please enter your email and password.";
+
+            loginMessage.style.color = "red";
+
+            return;
+        }
+
+
+     
+
+        loginMessage.textContent =
+            "Login successful!";
+
+        loginMessage.style.color = "green";
+
+
+       
+
+        setTimeout(function () {
+
+            window.location.href = "index.html";
+
+        }, 1000);
+
+    });
+
+}
