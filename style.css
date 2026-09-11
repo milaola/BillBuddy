@@ -1244,3 +1244,222 @@ main.container {
 
 }
 
+
+
+.auth-container {
+    min-height: calc(100vh - 72px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 50px 24px;
+
+    background: var(--background);
+}
+
+
+.auth-card {
+    width: 100%;
+    max-width: 390px;
+
+    padding: 38px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-lg);
+}
+
+
+
+
+.auth-card .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    margin-bottom: 28px;
+
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.auth-card .logo-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--primary-light);
+
+    border-radius: var(--radius);
+
+    font-size: 19px;
+}
+
+
+
+.auth-card h1 {
+    margin: 0 0 8px;
+
+    color: var(--text);
+
+    font-size: 30px;
+    font-weight: 750;
+    line-height: 1.2;
+    letter-spacing: -0.8px;
+
+    text-align: center;
+}
+
+
+
+.auth-description {
+    margin: 0 0 24px;
+
+    color: var(--text-muted);
+
+    font-size: 15px;
+    line-height: 1.5;
+
+    text-align: center;
+}
+
+
+
+
+#loginForm,
+#signupForm {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+#loginForm label,
+#signupForm label {
+    margin-bottom: 6px;
+
+    color: var(--text);
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+
+#loginForm input,
+#signupForm input {
+    width: 100%;
+    height: 46px;
+
+    padding: 0 13px;
+    margin-bottom: 18px;
+
+    background: var(--background);
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    color: var(--text);
+
+    outline: none;
+
+    box-sizing: border-box;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+
+
+#loginForm input::placeholder,
+#signupForm input::placeholder {
+    color: var(--text-muted);
+}
+
+
+
+#loginForm input:focus,
+#signupForm input:focus {
+    border-color: var(--primary);
+
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+
+
+.login-btn {
+    width: 100%;
+    height: 46px;
+
+    margin-top: 4px;
+
+    border: none;
+    border-radius: var(--radius);
+
+    background: var(--primary);
+
+    color: white;
+
+    font-size: 15px;
+    font-weight: 650;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.1s ease;
+}
+
+.login-btn:hover {
+    background: var(--primary-dark);
+}
+
+.login-btn:active {
+    transform: translateY(1px);
+}
+
+
+
+
+#loginMessage,
+#signupMessage {
+    margin: 16px 0 0;
+
+    font-size: 14px;
+    text-align: center;
+}
+
+
+
+
+.auth-link {
+    margin: 20px 0 0;
+
+    color: var(--text-muted);
+
+    font-size: 14px;
+    text-align: center;
+}
+
+.auth-link a {
+    color: var(--primary);
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
