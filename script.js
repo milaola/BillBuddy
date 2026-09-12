@@ -1,7 +1,12 @@
+// ============================================================
+// BILL BUDDY - SUBSCRIPTIONS
+// ============================================================
+
 let subscriptions =
     JSON.parse(localStorage.getItem("subscriptions")) || [];
 
 
+// Save subscriptions to browser storage
 function saveSubscriptions() {
 
     localStorage.setItem(
@@ -12,7 +17,12 @@ function saveSubscriptions() {
 }
 
 
-const subscriptionNamePattern = /^[a-zA-Z0-9\s]+$/;
+// ============================================================
+// VALIDATION
+// ============================================================
+
+const subscriptionNamePattern =
+    /^[a-zA-Z0-9\s]+$/;
 
 
 function isValidSubscriptionName(name) {
@@ -21,6 +31,40 @@ function isValidSubscriptionName(name) {
 
 }
 
+
+// ============================================================
+// PAYMENT CALCULATIONS
+// ============================================================
+
+function getMonthlyAmount(subscription) {
+
+    if (subscription.billingCycle === "Yearly") {
+
+        return subscription.amount / 12;
+
+    }
+
+    return subscription.amount;
+
+}
+
+
+function getYearlyAmount(subscription) {
+
+    if (subscription.billingCycle === "Yearly") {
+
+        return subscription.amount;
+
+    }
+
+    return subscription.amount * 12;
+
+}
+
+
+// ============================================================
+// PAYMENT DATES
+// ============================================================
 
 function getDaysUntilNextPayment(nextPaymentDate) {
 
@@ -35,12 +79,9 @@ function getDaysUntilNextPayment(nextPaymentDate) {
     const difference =
         payment.getTime() - today.getTime();
 
-    const daysUntilNextPayment =
-        Math.ceil(
-            difference / (1000 * 60 * 60 * 24)
-        );
-
-    return daysUntilNextPayment;
+    return Math.ceil(
+        difference / (1000 * 60 * 60 * 24)
+    );
 
 }
 
@@ -70,44 +111,44 @@ function getPaymentMessage(paymentDate) {
 
         return `Next payment in ${days} days`;
 
-    } else if (days === 0) {
+    }
+
+    if (days === 0) {
 
         return "Payment due today";
 
-    } else {
-
-        return `Payment overdue by ${Math.abs(days)} days`;
-
     }
+
+    return `Payment overdue by ${Math.abs(days)} days`;
 
 }
 
 
-function getMonthlyAmount(subscription) {
+// ============================================================
+// CATEGORY ICONS
+// ============================================================
 
-    if (subscription.billingCycle === "Yearly") {
+function getCategoryIcon(category) {
 
-        return subscription.amount / 12;
+    const icons = {
 
-    }
+        "Entertainment": "🎬",
+        "Software": "💻",
+        "Fitness": "🏋️",
+        "Cloud Storage": "☁️",
+        "Education": "📚",
+        "Other": "📦"
 
-    return subscription.amount;
+    };
 
-}
-
-
-function getYearlyAmount(subscription) {
-
-    if (subscription.billingCycle === "Yearly") {
-
-        return subscription.amount;
-
-    }
-
-    return subscription.amount * 12;
+    return icons[category] || "📦";
 
 }
 
+
+// ============================================================
+// ADD SUBSCRIPTION
+// ============================================================
 
 const subscriptionForm =
     document.getElementById("subscriptionForm");
@@ -122,31 +163,32 @@ if (subscriptionForm) {
             event.preventDefault();
 
             const name =
-                document.getElementById(
-                    "subscriptionName"
-                ).value.trim();
+                document
+                    .getElementById("subscriptionName")
+                    .value
+                    .trim();
 
             const amount =
                 Number(
-                    document.getElementById(
-                        "subscriptionAmount"
-                    ).value
+                    document
+                        .getElementById("subscriptionAmount")
+                        .value
                 );
 
             const category =
-                document.getElementById(
-                    "subscriptionCategory"
-                ).value;
+                document
+                    .getElementById("subscriptionCategory")
+                    .value;
 
             const billingCycle =
-                document.getElementById(
-                    "billingCycle"
-                ).value;
+                document
+                    .getElementById("billingCycle")
+                    .value;
 
             const nextPayment =
-                document.getElementById(
-                    "nextPayment"
-                ).value;
+                document
+                    .getElementById("nextPayment")
+                    .value;
 
 
             if (!isValidSubscriptionName(name)) {
@@ -160,10 +202,7 @@ if (subscriptionForm) {
             }
 
 
-            if (
-                isNaN(amount) ||
-                amount <= 0
-            ) {
+            if (isNaN(amount) || amount <= 0) {
 
                 alert(
                     "Please enter a valid subscription amount."
@@ -258,13 +297,15 @@ if (subscriptionForm) {
 }
 
 
+// ============================================================
+// DISPLAY SUBSCRIPTIONS
+// ============================================================
+
 const subscriptionsList =
     document.getElementById("subscriptionsList");
 
-
 const searchInput =
     document.getElementById("searchInput");
-
 
 const categoryFilter =
     document.getElementById("categoryFilter");
@@ -283,6 +324,7 @@ function displaySubscriptions() {
         [...subscriptions];
 
 
+    // Search
     if (searchInput) {
 
         const searchTerm =
@@ -309,6 +351,7 @@ function displaySubscriptions() {
     }
 
 
+    // Category filter
     if (
         categoryFilter &&
         categoryFilter.value !== "All"
@@ -329,6 +372,7 @@ function displaySubscriptions() {
     }
 
 
+    // No subscriptions
     if (subscriptions.length === 0) {
 
         subscriptionsList.innerHTML = `
@@ -339,7 +383,9 @@ function displaySubscriptions() {
                     📭
                 </div>
 
-                <h2>No subscriptions yet</h2>
+                <h2>
+                    No subscriptions yet
+                </h2>
 
                 <p>
                     Add your first subscription to start
@@ -359,6 +405,7 @@ function displaySubscriptions() {
     }
 
 
+    // Search returned nothing
     if (filteredSubscriptions.length === 0) {
 
         subscriptionsList.innerHTML = `
@@ -369,7 +416,9 @@ function displaySubscriptions() {
                     🔍
                 </div>
 
-                <h2>No subscriptions found</h2>
+                <h2>
+                    No subscriptions found
+                </h2>
 
                 <p>
                     Try changing your search or category filter.
@@ -433,7 +482,9 @@ function displaySubscriptions() {
                         <div class="subscription-cost">
 
                             <strong>
-                                $${subscription.amount.toFixed(2)}
+                                $${Number(
+                                    subscription.amount
+                                ).toFixed(2)}
                             </strong>
 
                             <span>
@@ -492,28 +543,9 @@ if (categoryFilter) {
 }
 
 
-function getCategoryIcon(category) {
-
-    const icons = {
-
-        "Entertainment": "🎬",
-
-        "Software": "💻",
-
-        "Fitness": "🏋️",
-
-        "Cloud Storage": "☁️",
-
-        "Education": "📚",
-
-        "Other": "📦"
-
-    };
-
-    return icons[category] || "📦";
-
-}
-
+// ============================================================
+// DELETE SUBSCRIPTION
+// ============================================================
 
 function deleteSubscription(id) {
 
@@ -549,6 +581,10 @@ function deleteSubscription(id) {
 }
 
 
+// ============================================================
+// INSIGHTS
+// ============================================================
+
 function displayInsights() {
 
     const insightMonthly =
@@ -570,7 +606,9 @@ function displayInsights() {
     if (
         !insightMonthly &&
         !insightYearly &&
-        !insightTotal
+        !insightTotal &&
+        !categoryInsights &&
+        !savingsContainer
     ) {
 
         return;
@@ -620,6 +658,7 @@ function displayInsights() {
     }
 
 
+    // Category insights
     if (categoryInsights) {
 
         if (subscriptions.length === 0) {
@@ -632,7 +671,9 @@ function displayInsights() {
                         📊
                     </div>
 
-                    <h3>No data available</h3>
+                    <h3>
+                        No data available
+                    </h3>
 
                     <p>
                         Add subscriptions to generate
@@ -712,6 +753,7 @@ function displayInsights() {
     }
 
 
+    // Savings message
     if (savingsContainer) {
 
         if (subscriptions.length === 0) {
@@ -786,6 +828,10 @@ function displayInsights() {
 }
 
 
+// ============================================================
+// LOAD CATEGORIES
+// ============================================================
+
 async function loadCategories() {
 
     try {
@@ -849,6 +895,10 @@ async function loadCategories() {
 
 }
 
+
+// ============================================================
+// IMPORT SUBSCRIPTIONS
+// ============================================================
 
 function importSubscriptionsFromFile(file) {
 
@@ -987,6 +1037,10 @@ if (importFile) {
 }
 
 
+// ============================================================
+// EXPORT SUBSCRIPTIONS
+// ============================================================
+
 function exportSubscriptions() {
 
     const data =
@@ -1020,127 +1074,538 @@ function exportSubscriptions() {
         "bill-buddy-subscriptions.json";
 
 
+    document.body.appendChild(link);
+
     link.click();
 
+    document.body.removeChild(link);
 
     URL.revokeObjectURL(url);
 
 }
 
 
+// ============================================================
+// SIGN UP
+// ============================================================
+
+const signupForm =
+    document.getElementById("signupForm");
+
+
+if (signupForm) {
+
+    signupForm.addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+
+            const name =
+                document
+                    .getElementById("name")
+                    .value
+                    .trim();
+
+            const email =
+                document
+                    .getElementById("email")
+                    .value
+                    .trim();
+
+            const password =
+                document
+                    .getElementById("password")
+                    .value;
+
+            const confirmPassword =
+                document
+                    .getElementById("confirmPassword")
+                    .value;
+
+            const signupMessage =
+                document.getElementById(
+                    "signupMessage"
+                );
+
+
+            if (!name || !email || !password) {
+
+                signupMessage.textContent =
+                    "Please fill in all fields.";
+
+                signupMessage.style.color =
+                    "var(--danger)";
+
+                return;
+
+            }
+
+
+            if (password.length < 6) {
+
+                signupMessage.textContent =
+                    "Password must be at least 6 characters.";
+
+                signupMessage.style.color =
+                    "var(--danger)";
+
+                return;
+
+            }
+
+
+            if (password !== confirmPassword) {
+
+                signupMessage.textContent =
+                    "Passwords do not match.";
+
+                signupMessage.style.color =
+                    "var(--danger)";
+
+                return;
+
+            }
+
+
+            signupMessage.textContent =
+                "Creating account...";
+
+            signupMessage.style.color =
+                "var(--muted)";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/signup",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                name: name,
+                                email: email,
+                                password: password
+                            })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    signupMessage.textContent =
+                        data.message ||
+                        "Unable to create account.";
+
+                    signupMessage.style.color =
+                        "var(--danger)";
+
+                    return;
+
+                }
+
+
+                signupMessage.textContent =
+                    "Account created successfully!";
+
+                signupMessage.style.color =
+                    "var(--success)";
+
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            "index.html";
+
+                    },
+                    800
+                );
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                signupMessage.textContent =
+                    "Could not connect to the server.";
+
+                signupMessage.style.color =
+                    "var(--danger)";
+
+            }
+
+        }
+    );
+
+}
+
+
+// ============================================================
+// LOGIN
+// ============================================================
+
+const loginForm =
+    document.getElementById("loginForm");
+
+
+if (loginForm) {
+
+    loginForm.addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+
+            const email =
+                document
+                    .getElementById("email")
+                    .value
+                    .trim();
+
+            const password =
+                document
+                    .getElementById("password")
+                    .value;
+
+            const loginMessage =
+                document.getElementById(
+                    "loginMessage"
+                );
+
+
+            if (!email || !password) {
+
+                loginMessage.textContent =
+                    "Please enter your email and password.";
+
+                loginMessage.style.color =
+                    "var(--danger)";
+
+                return;
+
+            }
+
+
+            loginMessage.textContent =
+                "Logging in...";
+
+            loginMessage.style.color =
+                "var(--muted)";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/login",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                email: email,
+                                password: password
+                            })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    loginMessage.textContent =
+                        data.message ||
+                        "Invalid email or password.";
+
+                    loginMessage.style.color =
+                        "var(--danger)";
+
+                    return;
+
+                }
+
+
+                loginMessage.textContent =
+                    "Login successful!";
+
+                loginMessage.style.color =
+                    "var(--success)";
+
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            "index.html";
+
+                    },
+                    500
+                );
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                loginMessage.textContent =
+                    "Could not connect to the server.";
+
+                loginMessage.style.color =
+                    "var(--danger)";
+
+            }
+
+        }
+    );
+
+}
+
+
+// ============================================================
+// DASHBOARD TOTALS
+// ============================================================
+
+function displayDashboardTotals() {
+
+    const monthlyTotalElement =
+        document.getElementById(
+            "monthlyTotal"
+        );
+
+    const subscriptionCountElement =
+        document.getElementById(
+            "subscriptionCount"
+        );
+
+    const upcomingCountElement =
+        document.getElementById(
+            "upcomingCount"
+        );
+
+
+    if (
+        !monthlyTotalElement &&
+        !subscriptionCountElement &&
+        !upcomingCountElement
+    ) {
+
+        return;
+
+    }
+
+
+    let monthlyTotal = 0;
+
+    subscriptions.forEach(
+        function (subscription) {
+
+            monthlyTotal +=
+                getMonthlyAmount(subscription);
+
+        }
+    );
+
+
+    if (monthlyTotalElement) {
+
+        monthlyTotalElement.textContent =
+            `$${monthlyTotal.toFixed(2)}`;
+
+    }
+
+
+    if (subscriptionCountElement) {
+
+        subscriptionCountElement.textContent =
+            subscriptions.length;
+
+    }
+
+
+    const upcomingPayments =
+        subscriptions.filter(
+            function (subscription) {
+
+                return (
+                    getDaysUntilNextPayment(
+                        subscription.nextPayment
+                    ) >= 0
+                );
+
+            }
+        );
+
+
+    if (upcomingCountElement) {
+
+        upcomingCountElement.textContent =
+            upcomingPayments.length;
+
+    }
+
+
+    displayUpcomingPayments();
+
+}
+
+
+
+function displayUpcomingPayments() {
+
+    const upcomingList =
+        document.getElementById(
+            "upcomingList"
+        );
+
+    const emptyUpcoming =
+        document.getElementById(
+            "emptyUpcoming"
+        );
+
+
+    if (!upcomingList) {
+
+        return;
+
+    }
+
+
+    const upcoming =
+        [...subscriptions]
+            .filter(
+                function (subscription) {
+
+                    return (
+                        getDaysUntilNextPayment(
+                            subscription.nextPayment
+                        ) >= 0
+                    );
+
+                }
+            )
+            .sort(
+                function (a, b) {
+
+                    return (
+                        new Date(a.nextPayment) -
+                        new Date(b.nextPayment)
+                    );
+
+                }
+            )
+            .slice(0, 5);
+
+
+    if (upcoming.length === 0) {
+
+        upcomingList.innerHTML = "";
+
+        if (emptyUpcoming) {
+
+            emptyUpcoming.style.display =
+                "block";
+
+        }
+
+        return;
+
+    }
+
+
+    if (emptyUpcoming) {
+
+        emptyUpcoming.style.display =
+            "none";
+
+    }
+
+
+    upcomingList.innerHTML =
+        upcoming
+            .map(
+                function (subscription) {
+
+                    const date =
+                        new Date(
+                            subscription.nextPayment
+                        );
+
+                    return `
+
+                        <div class="upcoming-card">
+
+                            <div class="upcoming-info">
+
+                                <div class="upcoming-date">
+
+                                    ${date.toLocaleDateString(
+                                        "en-US",
+                                        {
+                                            month: "short",
+                                            day: "numeric"
+                                        }
+                                    )}
+
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        ${subscription.name}
+                                    </strong>
+
+                                    <p>
+                                        ${getPaymentMessage(
+                                            subscription.nextPayment
+                                        )}
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <strong>
+                                $${Number(
+                                    subscription.amount
+                                ).toFixed(2)}
+                            </strong>
+
+                        </div>
+
+                    `;
+
+                }
+            )
+            .join("");
+
+}
+
+
+
 displaySubscriptions();
 
 displayInsights();
 
+displayDashboardTotals();
+
 loadCategories();
-
-const signupForm = document.getElementById("signupForm");
-
-if (signupForm) {
-
-    signupForm.addEventListener("submit", function (event) {
-
-        event.preventDefault();
-
-        const name =
-            document.getElementById("name").value.trim();
-
-        const email =
-            document.getElementById("email").value.trim();
-
-        const password =
-            document.getElementById("password").value;
-
-        const confirmPassword =
-            document.getElementById("confirmPassword").value;
-
-        const signupMessage =
-            document.getElementById("signupMessage");
-
-
-        
-
-        if (password !== confirmPassword) {
-
-            signupMessage.textContent =
-                "Passwords do not match.";
-
-            signupMessage.style.color = "red";
-
-            return;
-        }
-
-
-     
-
-        signupMessage.textContent =
-            "Account created successfully!";
-
-        signupMessage.style.color = "green";
-
-
-       
-
-        setTimeout(function () {
-
-            window.location.href = "index.html";
-
-        }, 1000);
-
-    });
-
-}
-
-
-
-
-const loginForm = document.getElementById("loginForm");
-
-if (loginForm) {
-
-    loginForm.addEventListener("submit", function (event) {
-
-        event.preventDefault();
-
-        const email =
-            document.getElementById("email").value.trim();
-
-        const password =
-            document.getElementById("password").value;
-
-        const loginMessage =
-            document.getElementById("loginMessage");
-
-
-     
-
-        if (!email || !password) {
-
-            loginMessage.textContent =
-                "Please enter your email and password.";
-
-            loginMessage.style.color = "red";
-
-            return;
-        }
-
-
-     
-
-        loginMessage.textContent =
-            "Login successful!";
-
-        loginMessage.style.color = "green";
-
-
-       
-
-        setTimeout(function () {
-
-            window.location.href = "index.html";
-
-        }, 1000);
-
-    });
-
-}

@@ -4,11 +4,15 @@ const bcrypt = require("bcrypt");
 const sqlite3 = require("sqlite3").verbose();
 
 const app = express();
+const path = require("path");
 
 const PORT = 3000;
 
 
 app.use(express.json());
+
+app.use(express.static(__dirname));
+
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -68,7 +72,7 @@ db.run(`
 app.get("/", (req, res) => {
 
     res.sendFile(
-        __dirname + "/index.html"
+        __dirname + "/login.html"
     );
 
 });
@@ -91,6 +95,80 @@ app.post("/api/signup", async (req, res) => {
             });
 
         }
+
+app.post("/api/login", (req, res) => {
+
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+
+        return res.status(400).json({
+            message: "Please enter your email and password."
+        });
+
+    }
+
+    db.get(
+        "SELECT * FROM users WHERE email = ?",
+        [email],
+        async (error, user) => {
+
+            if (error) {
+
+                console.error(error);
+
+                return res.status(500).json({
+                    message: "Database error."
+                });
+
+            }
+
+            if (!user) {
+
+                return res.status(401).json({
+                    message: "Invalid email or password."
+                });
+
+            }
+
+            try {
+
+                const passwordMatches =
+                    await bcrypt.compare(
+                        password,
+                        user.password
+                    );
+
+                if (!passwordMatches) {
+
+                    return res.status(401).json({
+                        message: "Invalid email or password."
+                    });
+
+                }
+
+                req.session.userId = user.id;
+                req.session.userName = user.name;
+
+                return res.status(200).json({
+                    message: "Login successful."
+                });
+
+            } catch (error) {
+
+                console.error(error);
+
+                return res.status(500).json({
+                    message: "Something went wrong."
+                });
+
+            }
+
+        }
+    );
+
+});
+
 
 
       
